@@ -46,6 +46,8 @@ describe('Webhook router', () => {
     await (await Client.getInstance()).close();
     MockDate.reset();
     delete process.env.RUMORS_LINE_BOT_URL;
+    await webhookRouter.groupEventQueue.close();
+    await webhookRouter.expiredGroupEventQueue.close();
   });
 
   it('singleUserHandler() should handle follow event', async () => {
